@@ -15,6 +15,7 @@ class nav42 {
 	protected $liClassFromMetaField;
 	protected $linkFromUserFunc;
 	protected $hideIds;
+	protected $addArticleID;
 
 	// lang nav vars
 	protected $langUlId;
@@ -49,6 +50,7 @@ class nav42 {
 		$this->liClassFromMetaField = '';
 		$this->linkFromUserFunc = '';
 		$this->hideIds = array();
+		$this->addArticleID = false;
 
 		$this->langUlId = '';
 		$this->langSelectedClass = 'selected';
@@ -132,6 +134,10 @@ class nav42 {
 
 	public function setHideIds($hideIds) {
 		$this->hideIds = $hideIds;
+	}
+
+	public function setAddArticleID($addArticleID) {
+		$this->addArticleID = $addArticleID;
 	}
 
 	/* ------------------------------------------------------------------------------------------------------ */
@@ -233,6 +239,11 @@ class nav42 {
 					$cssClasses .= ' ' . $this->selectedClass;
 				} else {
 					// do nothing
+				}
+				
+				// add article ID
+				if ($idAttribute == "") {
+					if($this->addArticleID) $idAttribute = ' id="cat' . $cat->getId() . '"';
 				}
 
 				$trimmedCssClasses = trim($cssClasses);
